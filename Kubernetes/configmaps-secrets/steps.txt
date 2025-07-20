@@ -1,0 +1,20 @@
+steps.
+
+1) create and apply conf file.
+2) create configmap
+kubectl create configmap nginx-config `
+  --from-file=custom-nginx.conf
+3)create secret
+kubectl create secret generic app-secret `
+  --from-literal=username=sai_admin `
+  --from-literal=password=supersecure
+4) create pod using pod.yml attaching volumeMounts & env and apply it.
+5) kubectl exec -it nginx-demo-windows -- /bin/bash
+	cat /etc/nginx/nginx.conf     # From ConfigMap
+	echo $SECRET_USERNAME         # From Secret
+	echo $SECRET_PASSWORD         # From Secret
+6) kubectl expose pod nginx-demo-windows `(TO Expose and acccess pod)
+  --port=8080 --type=NodePort
+7) minikube service nginx-demo-windows
+
+
