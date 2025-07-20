@@ -1,0 +1,11 @@
+1. create docker file and index file.
+2. build nginx-custom image.
+3. to run it specifically in minikube vm, FOR CMD FOR /f "tokens=*" %i IN ('minikube docker-env') DO @%i
+then build docker build -t nginx-custom .
+4. run nginx-custom deployment file(nginx-custom-dep) with imagePullPolicy: Never
+5. this creates deploy and also pods.
+6.  create service with kubectl expose deployment nginx-custom --port=80
+7. install ingress controller from minikube addons enable ingress and verify with kubectl get pods -n ingress-nginx
+8. run ingress.yml make sure ip address is populated in kubectl get ingress
+9. fetch url from >minikube service nginx-custom --url and add it to hosts file in C:\Windows\System32\drivers\etc 
+10.Now run minikube tunnel in other cmd and in other cmd type curl http://nginx.local/
