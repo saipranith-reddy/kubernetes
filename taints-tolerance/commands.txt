@@ -1,0 +1,4 @@
+commands:
+
+kubectl label node nginx-affinity-worker4 dedicated=nginx4
+kubectl get nodes --show-labels | findstr dedicated
