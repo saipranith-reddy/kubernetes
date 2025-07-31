@@ -1,0 +1,25 @@
+# nginx-affinity.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-taint
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-taint
+  template:
+    metadata:
+      labels:
+        app: nginx-taint
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80     
+      tolerations:
+      - key: "nginx"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
